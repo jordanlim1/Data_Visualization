@@ -26,18 +26,18 @@ const mockData: Response = [
 
 describe("Chart", () => {
   it("renders a chart", () => {
-    render(<Chart data={mockData} startDate={dayjs('2020-01-07')} endDate={dayjs('2020-01-07')} />);
+    render(<Chart data={mockData} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""} />);
     expect(screen.getByText("Downloads")).toBeInTheDocument();
   });
 
   it("renders the title and subtitle", () => {
-    render(<Chart data={mockData} startDate={dayjs('2020-01-07')} endDate={dayjs('2020-01-07')}/>);
+    render(<Chart data={mockData} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""}/>);
     expect(screen.getByText("Downloads by App")).toBeInTheDocument();
     expect(screen.getByText("TODO")).toBeInTheDocument();
   });
 
   it("does not render a chart if data is empty", () => {
-    render(<Chart data={[]} startDate={dayjs('2020-01-07')} endDate={dayjs('2020-01-07')}/>);
+    render(<Chart data={[]} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""}/>);
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();
   });
 });
