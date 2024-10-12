@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Table from "./Table";
 import type { Response } from "./types";
+import dayjs from "dayjs";
 
 const mockData: Response = [
   {
@@ -25,14 +26,14 @@ const mockData: Response = [
 
 describe("Table", () => {
   it("renders a table", () => {
-    render(<Table data={mockData} />);
+    render(<Table data={mockData} startDate={dayjs('2020-01-07')} endDate={dayjs('2020-01-07')}/>);
 
     expect(screen.getByText("App Name")).toBeInTheDocument();
     expect(screen.getByText("Downloads")).toBeInTheDocument();
   });
 
   it("does not render a table if data is empty", () => {
-    render(<Table data={[]} />);
+    render(<Table data={[]} startDate={dayjs('2020-01-07')} endDate={dayjs('2020-01-07')}/>);
 
     expect(screen.queryByText("App Name")).not.toBeInTheDocument();
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();

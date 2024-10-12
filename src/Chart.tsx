@@ -3,25 +3,29 @@ import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import type { Response } from "./types";
 import { dayjsUtc } from "./dayjs";
+import { Dayjs } from "dayjs";
 
 type ChartProps = {
   data: Response;
+  startDate: Dayjs;
+  endDate: Dayjs;
 };
 
-const Chart = ({ data }: ChartProps) => {
+const Chart = ({ data, startDate, endDate }: ChartProps) => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const [seriesData, setSeriesData] = useState<Highcharts.SeriesOptionsType[]>(
     [],
   );
 
-  useEffect(() => {
+
+  function updateSeriesData(){
     const newSeriesData: Highcharts.SeriesOptionsType[] = data.map((series) => {
       return {
         name: series.name,
         type: "line",
-        data: series.data.map(([date, value]) => {
+        data: series.data.map(([date, downloads, revenue]) => {
           const dateMs = dayjsUtc(date).valueOf(); // convert date string to unix milliseconds
-          const yValue = value as number;
+          const yValue = downloads as number;
           return {
             x: dateMs,
             y: yValue,
@@ -30,6 +34,11 @@ const Chart = ({ data }: ChartProps) => {
       };
     });
     setSeriesData(newSeriesData);
+  }
+
+
+  useEffect(() => {
+    updateSeriesData()
   }, [data]);
 
   if (!seriesData.length) {
@@ -41,7 +50,7 @@ const Chart = ({ data }: ChartProps) => {
       text: "Downloads by App",
     },
     subtitle: {
-      text: "TODO",
+      text: `${startDate.format('MMM DD, YYYY')} - ${endDate.format('MMM DD, YYYY')}`,
     },
     yAxis: {
       title: {
