@@ -44,18 +44,16 @@ const Chart = ({ data, startDate, endDate, display }: ChartProps) => {
     return null;
   }
 
-  const displayText = display === "downloads" ? "Downloads" : "Revenue";
-
   const options: Highcharts.Options = {
     title: {
-      text: `${displayText} by App`,
+      text: `${display === "downloads" ? "Downloads" : "Revenue"} by App`,
     },
     subtitle: {
       text: `${startDate.format("MMM DD, YYYY")} - ${endDate.format("MMM DD, YYYY")}`,
     },
     yAxis: {
       title: {
-        text: displayText,
+        text: display === "downloads" ? "Downloads" : "Revenue ($)",
       },
     },
     xAxis: {
