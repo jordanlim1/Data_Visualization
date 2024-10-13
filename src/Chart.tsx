@@ -31,7 +31,7 @@ const Chart = ({
   const [noData, setNoData] = useState(false);
 
   useEffect(() => {
-    //add setTimeout to make sure loading state is visible
+    //add setTimeout to ensure loading state is visible
     setTimeout(() => {
       const filteredAppData = data.map((app) => ({
         ...app,
