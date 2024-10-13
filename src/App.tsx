@@ -53,7 +53,10 @@ const App = () => {
             disableFuture
             minDate={startDate.add(1, "day")}
             slotProps={{ textField: { size: "small" } }}
-            onChange={(event: Dayjs | null) => setEndDate(event!)}
+            onChange={(event: Dayjs | null) => {
+              setEndDate(event!);
+              setIsLoading(true);
+            }}
           />
         </LocalizationProvider>
       </div>

@@ -26,8 +26,10 @@ const Chart = ({
   const [seriesData, setSeriesData] = useState<Highcharts.SeriesOptionsType[]>(
     [],
   );
+  const [noData, setNoData] = useState(false);
 
   useEffect(() => {
+    //add setTimeout to make sure loading state is visible
     setTimeout(() => {
       const filteredAppData = data.map((app) => ({
         ...app,
@@ -40,6 +42,9 @@ const Chart = ({
           return dateMs >= startDateMs && dateMs <= endDateMs;
         }),
       }));
+
+      const hasData = filteredAppData.some((app) => app.data.length > 0);
+      setNoData(!hasData);
 
       const newSeriesData: Highcharts.SeriesOptionsType[] = filteredAppData.map(
         (series) => ({
@@ -60,10 +65,10 @@ const Chart = ({
 
       setSeriesData(newSeriesData);
       setIsLoading(false);
-    }, 800);
+    }, 500);
   }, [data, startDate, endDate, display]);
 
-  if (!data.length) {
+  if (!seriesData.length) {
     return (
       <div
         style={{
@@ -75,6 +80,26 @@ const Chart = ({
         }}
       >
         <Loading />;
+      </div>
+    );
+  }
+
+  //handle edge case if user selects outside of valid date range
+
+  if (noData) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexGrow: 1,
+          height: 400,
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+        }}
+      >
+        No data available for the selected date range
       </div>
     );
   }
