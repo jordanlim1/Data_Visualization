@@ -25,6 +25,22 @@ const mockData: Response = [
 ];
 
 describe("Chart", () => {
+  it("renders the loading spinner when isLoading is true", () => {
+    render(
+      <Chart
+        data={mockData}
+        startDate={dayjs("2020-01-01")}
+        endDate={dayjs("2020-01-07")}
+        display={"downloads"}
+        isLoading={true} // Simulate loading state
+        setIsLoading={jest.fn()}
+      />,
+    );
+
+    // Expect the CircularProgress to be rendered
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+  });
+
   it("renders a chart", () => {
     render(
       <Chart

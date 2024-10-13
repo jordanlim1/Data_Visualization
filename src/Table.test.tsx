@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import Table from "./Table";
 import type { Response } from "./types";
 import dayjs from "dayjs";
@@ -38,6 +38,23 @@ describe("Table", () => {
 
     expect(screen.getByText("App Name")).toBeInTheDocument();
     expect(screen.getByText("Downloads")).toBeInTheDocument();
+    expect(screen.getByText("Revenue")).toBeInTheDocument();
+    expect(screen.getByText("RPD")).toBeInTheDocument();
+  });
+
+  it("renders the loading spinner when isLoading is true", () => {
+    render(
+      <Table
+        data={mockData}
+        startDate={dayjs("2023-01-01")}
+        endDate={dayjs("2023-01-02")}
+        isLoading={true} // Simulate loading state
+        setIsLoading={jest.fn()}
+      />,
+    );
+
+    // Check if the Loading spinner is rendered
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 
   it("does not render a table if data is empty", () => {
@@ -53,5 +70,25 @@ describe("Table", () => {
 
     expect(screen.queryByText("App Name")).not.toBeInTheDocument();
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();
+  });
+
+  it("formats downloads, revenue, and RPD correctly", () => {
+    render(
+      <Table
+        data={mockData}
+        startDate={dayjs("2023-01-01")}
+        endDate={dayjs("2023-01-02")}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
+
+    screen.debug();
+    const rows = screen.getAllByRole("row"); // Get all rows
+    const firstRow = within(rows[1]); // First row with data, since row[0] might be headers
+
+    expect(firstRow.getByText("300")).toBeInTheDocument(); // Total downloads for App 2
+    expect(firstRow.getByText("$5.00")).toBeInTheDocument(); // Total revenue for App 2
+    expect(firstRow.getByText("$0.02")).toBeInTheDocument(); // RPD for App 2
   });
 });
