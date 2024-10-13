@@ -103,6 +103,7 @@ const Table = ({ data, startDate, endDate, isTableLoading }: TableProps) => {
 
   return (
     <div
+      data-testid="table-component"
       style={{
         height: 400,
         width: "100%",

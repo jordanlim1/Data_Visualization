@@ -54,7 +54,6 @@ describe("Chart", () => {
         setIsTableLoading={jest.fn()}
       />,
     );
-    screen.debug(); // This will output the rendered component
 
     //HighCharts renders the text as an SVG so getByText will not work
     expect(

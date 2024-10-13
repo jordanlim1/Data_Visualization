@@ -101,7 +101,7 @@ const Chart = ({
           fontWeight: "bold",
         }}
       >
-        No data available for the selected date range
+        <p> No data available for the selected date range </p>
       </div>
     );
   }
@@ -146,6 +146,7 @@ const Chart = ({
 
   return (
     <div
+      data-testid="chart-component"
       style={{
         minHeight: 200,
         alignContent: "center",
