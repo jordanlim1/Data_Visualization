@@ -10,8 +10,9 @@ type ChartProps = {
   startDate: Dayjs;
   endDate: Dayjs;
   display: string;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>;
+  isChartLoading: boolean;
+  setIsChartLoading: React.Dispatch<SetStateAction<boolean>>;
+  setIsTableLoading: React.Dispatch<SetStateAction<boolean>>;
 };
 
 const Chart = ({
@@ -19,8 +20,9 @@ const Chart = ({
   startDate,
   endDate,
   display,
-  isLoading,
-  setIsLoading,
+  isChartLoading,
+  setIsChartLoading,
+  setIsTableLoading,
 }: ChartProps) => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const [seriesData, setSeriesData] = useState<Highcharts.SeriesOptionsType[]>(
@@ -64,7 +66,8 @@ const Chart = ({
       );
 
       setSeriesData(newSeriesData);
-      setIsLoading(false);
+      setIsChartLoading(false);
+      setIsTableLoading(false);
     }, 500);
   }, [data, startDate, endDate, display]);
 
@@ -148,7 +151,7 @@ const Chart = ({
         alignContent: "center",
       }}
     >
-      {isLoading ? (
+      {isChartLoading ? (
         <Loading />
       ) : (
         <HighchartsReact

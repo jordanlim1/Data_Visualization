@@ -4,12 +4,12 @@ import { Dayjs } from "dayjs";
 import { dayjsUtc } from "./dayjs";
 import Loading from "./Loading";
 import React, { SetStateAction } from "react";
+
 type TableProps = {
   data: Response;
   startDate: Dayjs;
   endDate: Dayjs;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>;
+  isTableLoading: boolean;
 };
 
 type RowProps = {
@@ -20,13 +20,7 @@ type RowProps = {
   RPD: string;
 };
 
-const Table = ({
-  data,
-  startDate,
-  endDate,
-  isLoading,
-  setIsLoading,
-}: TableProps) => {
+const Table = ({ data, startDate, endDate, isTableLoading }: TableProps) => {
   if (!data.length) {
     return null;
   }
@@ -118,7 +112,7 @@ const Table = ({
         alignItems: "center",
       }}
     >
-      {isLoading ? (
+      {isTableLoading ? (
         <Loading />
       ) : (
         <DataGrid

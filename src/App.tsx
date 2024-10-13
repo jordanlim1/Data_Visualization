@@ -14,10 +14,12 @@ const App = () => {
   const [startDate, setStartDate] = useState<Dayjs>(dayjs("2020-01-01"));
   const [endDate, setEndDate] = useState<Dayjs>(dayjs("2020-01-07"));
   const [display, setDisplay] = useState("downloads");
-  const [isLoading, setIsLoading] = useState(false);
+  //2 seperate loading states because table should not rerender when revenue or download buttons are triggered, only the chart
+  const [isChartLoading, setIsChartLoading] = useState(false);
+  const [isTableLoading, setIsTableLoading] = useState(false);
 
   function handleDisplay(event: React.MouseEvent<HTMLButtonElement>) {
-    setIsLoading(true);
+    setIsChartLoading(true);
     setDisplay(event.currentTarget.value);
   }
 
@@ -36,7 +38,8 @@ const App = () => {
             slotProps={{ textField: { size: "small" } }}
             onChange={(event: Dayjs | null) => {
               setStartDate(event!);
-              setIsLoading(true);
+              setIsChartLoading(true);
+              setIsTableLoading(true);
             }}
           />
         </LocalizationProvider>
@@ -55,7 +58,8 @@ const App = () => {
             slotProps={{ textField: { size: "small" } }}
             onChange={(event: Dayjs | null) => {
               setEndDate(event!);
-              setIsLoading(true);
+              setIsChartLoading(true);
+              setIsTableLoading(true);
             }}
           />
         </LocalizationProvider>
@@ -91,16 +95,16 @@ const App = () => {
           startDate={startDate}
           endDate={endDate}
           display={display}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
+          isChartLoading={isChartLoading}
+          setIsChartLoading={setIsChartLoading}
+          setIsTableLoading={setIsTableLoading}
         />
 
         <Table
           data={data}
           startDate={startDate}
           endDate={endDate}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
+          isTableLoading={isTableLoading}
         />
       </div>
     </div>

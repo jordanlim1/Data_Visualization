@@ -32,8 +32,9 @@ describe("Chart", () => {
         startDate={dayjs("2020-01-01")}
         endDate={dayjs("2020-01-07")}
         display={"downloads"}
-        isLoading={true} // Simulate loading state
-        setIsLoading={jest.fn()}
+        isChartLoading={true} // Simulate loading state
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
 
@@ -48,8 +49,9 @@ describe("Chart", () => {
         startDate={dayjs("2020-01-01")}
         endDate={dayjs("2020-01-07")}
         display={"downloads"}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isChartLoading={false}
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
     screen.debug(); // This will output the rendered component
@@ -67,8 +69,9 @@ describe("Chart", () => {
         startDate={dayjs("2020-01-01")}
         endDate={dayjs("2020-01-07")}
         display={"downloads"}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isChartLoading={false}
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
     expect(screen.getByText("Downloads by App")).toBeInTheDocument();
@@ -83,8 +86,9 @@ describe("Chart", () => {
         startDate={dayjs("2020-01-01")}
         endDate={dayjs("2020-01-07")}
         display={"revenue"}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isChartLoading={false}
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
     expect(screen.getByText("Revenue by App")).toBeInTheDocument();
@@ -97,8 +101,9 @@ describe("Chart", () => {
         startDate={dayjs("2023-01-01")}
         endDate={dayjs("2023-01-07")}
         display={"downloads"}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isChartLoading={false}
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
     expect(screen.getByText("Jan 01, 2023 - Jan 07, 2023")).toBeInTheDocument();
@@ -111,8 +116,9 @@ describe("Chart", () => {
         startDate={dayjs("2020-01-01")}
         endDate={dayjs("2020-01-07")}
         display={"downloads"}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isChartLoading={false}
+        setIsChartLoading={jest.fn()}
+        setIsTableLoading={jest.fn()}
       />,
     );
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();

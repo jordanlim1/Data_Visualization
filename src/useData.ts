@@ -8,7 +8,7 @@ const useData = () => {
 
   const fetchData = async () => {
     try {
-      // Simulate delay with setTimeout
+      // simulate delay with setTimeout
       setTimeout(async () => {
         const response = await fetch(`${domain}/data.json`);
         const jsonData = await response.json();

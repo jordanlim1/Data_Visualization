@@ -31,8 +31,7 @@ describe("Table", () => {
         data={mockData}
         startDate={dayjs("2020-01-07")}
         endDate={dayjs("2020-01-07")}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isTableLoading={false}
       />,
     );
 
@@ -48,8 +47,7 @@ describe("Table", () => {
         data={mockData}
         startDate={dayjs("2023-01-01")}
         endDate={dayjs("2023-01-02")}
-        isLoading={true} // Simulate loading state
-        setIsLoading={jest.fn()}
+        isTableLoading={true}
       />,
     );
 
@@ -63,8 +61,7 @@ describe("Table", () => {
         data={[]}
         startDate={dayjs("2020-01-07")}
         endDate={dayjs("2020-01-07")}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isTableLoading={false}
       />,
     );
 
@@ -78,8 +75,7 @@ describe("Table", () => {
         data={mockData}
         startDate={dayjs("2023-01-01")}
         endDate={dayjs("2023-01-02")}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isTableLoading={false}
       />,
     );
 
@@ -97,8 +93,7 @@ describe("Table", () => {
         data={mockData}
         startDate={dayjs("2023-01-01")}
         endDate={dayjs("2023-01-02")}
-        isLoading={false}
-        setIsLoading={jest.fn()}
+        isTableLoading={false}
       />,
     );
 
