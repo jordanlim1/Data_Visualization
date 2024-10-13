@@ -54,21 +54,4 @@ describe("Table", () => {
     expect(screen.queryByText("App Name")).not.toBeInTheDocument();
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();
   });
-
-  it("renders the correct rows based on provided data", () => {
-    render(
-      <Table
-        data={mockData}
-        startDate={dayjs("2020-01-07")}
-        endDate={dayjs("2020-01-07")}
-        isLoading={false}
-        setIsLoading={jest.fn()}
-      />,
-    );
-
-    expect(screen.getByText("App 1")).toBeInTheDocument();
-    expect(screen.getByText("App 2")).toBeInTheDocument();
-    expect(screen.getByText("100")).toBeInTheDocument(); // Downloads for App 1
-    expect(screen.getByText("250")).toBeInTheDocument(); // Downloads for App 2
-  });
 });

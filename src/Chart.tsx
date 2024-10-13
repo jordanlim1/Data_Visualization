@@ -63,7 +63,7 @@ const Chart = ({
     }, 800);
   }, [data, startDate, endDate, display]);
 
-  if (!seriesData.length) {
+  if (!data.length) {
     return (
       <div
         style={{

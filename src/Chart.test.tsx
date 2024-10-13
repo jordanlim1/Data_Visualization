@@ -36,7 +36,12 @@ describe("Chart", () => {
         setIsLoading={jest.fn()}
       />,
     );
-    expect(screen.getByText("Downloads")).toBeInTheDocument();
+    screen.debug(); // This will output the rendered component
+
+    //HighCharts renders the text as an SVG so getByText will not work
+    expect(
+      screen.getByRole("img", { name: /Downloads by App/i }),
+    ).toBeInTheDocument();
   });
 
   it("renders the title and subtitle", () => {
