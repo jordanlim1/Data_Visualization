@@ -83,12 +83,31 @@ describe("Table", () => {
       />,
     );
 
-    screen.debug();
     const rows = screen.getAllByRole("row"); // Get all rows
     const firstRow = within(rows[1]); // First row with data, since row[0] might be headers
 
     expect(firstRow.getByText("300")).toBeInTheDocument(); // Total downloads for App 2
     expect(firstRow.getByText("$5.00")).toBeInTheDocument(); // Total revenue for App 2
     expect(firstRow.getByText("$0.02")).toBeInTheDocument(); // RPD for App 2
+  });
+
+  it("renders the image icons in the table", () => {
+    render(
+      <Table
+        data={mockData}
+        startDate={dayjs("2023-01-01")}
+        endDate={dayjs("2023-01-02")}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
+
+    const app1Image = screen.getByAltText("App 1");
+    expect(app1Image).toBeInTheDocument();
+    expect(app1Image).toHaveAttribute("src", "https://example.com/icon.png");
+
+    const app2Image = screen.getByAltText("App 2");
+    expect(app2Image).toBeInTheDocument();
+    expect(app2Image).toHaveAttribute("src", "https://example.com/icon.png");
   });
 });

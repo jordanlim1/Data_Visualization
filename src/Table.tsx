@@ -43,6 +43,7 @@ const Table = ({
           >
             <img
               src={params.value.src}
+              alt={params.value.appName}
               style={{
                 width: 50,
                 height: "auto",
