@@ -26,18 +26,74 @@ const mockData: Response = [
 
 describe("Chart", () => {
   it("renders a chart", () => {
-    render(<Chart data={mockData} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""} />);
+    render(
+      <Chart
+        data={mockData}
+        startDate={dayjs("2020-01-01")}
+        endDate={dayjs("2020-01-07")}
+        display={"downloads"}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
     expect(screen.getByText("Downloads")).toBeInTheDocument();
   });
 
   it("renders the title and subtitle", () => {
-    render(<Chart data={mockData} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""}/>);
+    render(
+      <Chart
+        data={mockData}
+        startDate={dayjs("2020-01-01")}
+        endDate={dayjs("2020-01-07")}
+        display={"downloads"}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
     expect(screen.getByText("Downloads by App")).toBeInTheDocument();
-    expect(screen.getByText("TODO")).toBeInTheDocument();
+    //TODO should be removed after finishing assessment?
+    // expect(screen.getByText("TODO")).toBeInTheDocument();
+  });
+
+  it("renders a chart with Revenue", () => {
+    render(
+      <Chart
+        data={mockData}
+        startDate={dayjs("2020-01-01")}
+        endDate={dayjs("2020-01-07")}
+        display={"revenue"}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
+    expect(screen.getByText("Revenue by App")).toBeInTheDocument();
+  });
+
+  it("renders the correct date range in the subtitle", () => {
+    render(
+      <Chart
+        data={mockData}
+        startDate={dayjs("2023-01-01")}
+        endDate={dayjs("2023-01-07")}
+        display={"downloads"}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
+    expect(screen.getByText("Jan 01, 2023 - Jan 07, 2023")).toBeInTheDocument();
   });
 
   it("does not render a chart if data is empty", () => {
-    render(<Chart data={[]} startDate={dayjs('2020-01-01')} endDate={dayjs('2020-01-07')} display={""}/>);
+    render(
+      <Chart
+        data={[]}
+        startDate={dayjs("2020-01-01")}
+        endDate={dayjs("2020-01-07")}
+        display={"downloads"}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />,
+    );
     expect(screen.queryByText("Downloads")).not.toBeInTheDocument();
   });
 });

@@ -2,11 +2,14 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import type { Response } from "./types";
 import { Dayjs } from "dayjs";
 import { dayjsUtc } from "./dayjs";
-
+import Loading from "./Loading";
+import React, { SetStateAction } from "react";
 type TableProps = {
   data: Response;
   startDate: Dayjs;
   endDate: Dayjs;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>;
 };
 
 type RowProps = {
@@ -17,7 +20,13 @@ type RowProps = {
   RPD: string;
 };
 
-const Table = ({ data, startDate, endDate }: TableProps) => {
+const Table = ({
+  data,
+  startDate,
+  endDate,
+  isLoading,
+  setIsLoading,
+}: TableProps) => {
   if (!data.length) {
     return null;
   }
@@ -48,14 +57,13 @@ const Table = ({ data, startDate, endDate }: TableProps) => {
       },
     },
     { field: "downloads", headerName: "Downloads", width: 150 },
-    // need a sort comparator because MUI data grid not sorting revenue strings as expected
     {
       field: "revenue",
       headerName: "Revenue",
       width: 150,
       type: "string",
       sortComparator: (v1, v2) =>
-        parseInt(v1.replace(/[$,]/g, "")) - parseInt(v2.replace(/[$,]/g, "")),
+        parseInt(v1.replace(/[$,]/g, "")) - parseInt(v2.replace(/[$,]/g, "")), // need a sort comparator because MUI data grid not sorting revenue strings as expected
     },
     { field: "RPD", headerName: "RPD", width: 150 },
   ];
@@ -99,16 +107,29 @@ const Table = ({ data, startDate, endDate }: TableProps) => {
   });
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        sx={{
-          ".MuiDataGrid-columnHeaderTitle": {
-            fontWeight: "bold !important",
-          },
-        }}
-      />
+    <div
+      style={{
+        height: 400,
+        width: "100%",
+        display: "flex",
+        flexGrow: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          sx={{
+            ".MuiDataGrid-columnHeaderTitle": {
+              fontWeight: "bold !important",
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Response } from "./types";
 
 const domain = "http://localhost:3000";
@@ -19,7 +19,10 @@ const useData = () => {
     }
   };
 
-  fetchData();
+  //stop infinite fetching by wrapping in useEffect
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return data;
 };
