@@ -85,8 +85,7 @@ const Chart = ({
   }
 
   //handle edge case if user selects outside of valid date range
-
-  if (noData && !seriesData.length) {
+  if (noData && seriesData.length) {
     return (
       <div
         style={{
