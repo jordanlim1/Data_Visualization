@@ -45,8 +45,8 @@ const Chart = ({
         }),
       }));
 
-      const hasData = filteredAppData.some((app) => app.data.length > 0);
-      setNoData(!hasData);
+      const availableData = filteredAppData.some((app) => app.data.length > 0);
+      setNoData(!availableData);
 
       const newSeriesData: Highcharts.SeriesOptionsType[] = filteredAppData.map(
         (series) => ({
@@ -71,6 +71,7 @@ const Chart = ({
     }, 500);
   }, [data, startDate, endDate, display]);
 
+  //initial load screen on first render
   if (!data.length) {
     return (
       <div
