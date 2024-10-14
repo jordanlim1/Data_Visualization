@@ -13,10 +13,10 @@ const App = () => {
   const data = useData();
   const [startDate, setStartDate] = useState<Dayjs>(dayjs("2020-01-01"));
   const [endDate, setEndDate] = useState<Dayjs>(dayjs("2020-01-07"));
-  const [display, setDisplay] = useState("downloads");
+  const [display, setDisplay] = useState<string>("downloads");
   //2 seperate loading states because table should not rerender when revenue or download buttons are triggered, only the chart
-  const [isChartLoading, setIsChartLoading] = useState(false);
-  const [isTableLoading, setIsTableLoading] = useState(false);
+  const [isChartLoading, setIsChartLoading] = useState<boolean>(false);
+  const [isTableLoading, setIsTableLoading] = useState<boolean>(false);
 
   function handleDisplay(event: React.MouseEvent<HTMLButtonElement>) {
     setIsChartLoading(true);

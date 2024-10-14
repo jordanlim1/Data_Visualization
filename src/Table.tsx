@@ -1,24 +1,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import type { Response } from "./types";
-import { Dayjs } from "dayjs";
 import { dayjsUtc } from "./dayjs";
 import Loading from "./Loading";
-import React, { SetStateAction } from "react";
-
-type TableProps = {
-  data: Response;
-  startDate: Dayjs;
-  endDate: Dayjs;
-  isTableLoading: boolean;
-};
-
-type RowProps = {
-  id: number;
-  appName: { appName: string; src: string };
-  downloads: string;
-  revenue: string;
-  RPD: string;
-};
+import { TableProps, RowProps } from "./types";
 
 const Table = ({ data, startDate, endDate, isTableLoading }: TableProps) => {
   if (!data.length) {

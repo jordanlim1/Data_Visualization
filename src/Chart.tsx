@@ -5,15 +5,7 @@ import type { Response } from "./types";
 import { dayjsUtc } from "./dayjs";
 import { Dayjs } from "dayjs";
 import Loading from "./Loading";
-type ChartProps = {
-  data: Response;
-  startDate: Dayjs;
-  endDate: Dayjs;
-  display: string;
-  isChartLoading: boolean;
-  setIsChartLoading: React.Dispatch<SetStateAction<boolean>>;
-  setIsTableLoading: React.Dispatch<SetStateAction<boolean>>;
-};
+import { ChartProps } from "./types";
 
 const Chart = ({
   data,
@@ -28,7 +20,7 @@ const Chart = ({
   const [seriesData, setSeriesData] = useState<Highcharts.SeriesOptionsType[]>(
     [],
   );
-  const [noData, setNoData] = useState(false);
+  const [noData, setNoData] = useState<boolean>(false);
 
   useEffect(() => {
     //add setTimeout to ensure loading state is visible
