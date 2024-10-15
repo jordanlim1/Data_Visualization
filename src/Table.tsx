@@ -33,6 +33,9 @@ const Table = ({ data, startDate, endDate, isTableLoading }: TableProps) => {
           </div>
         );
       },
+      sortComparator: (v1, v2) => {
+        return v1.appName.localeCompare(v2.appName);
+      },
     },
     { field: "downloads", headerName: "Downloads", width: 150 },
     {
