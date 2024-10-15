@@ -1,9 +1,7 @@
-import React, { SetStateAction, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import type { Response } from "./types";
 import { dayjsUtc } from "./dayjs";
-import { Dayjs } from "dayjs";
 import Loading from "./Loading";
 import { ChartProps } from "./types";
 
