@@ -33,6 +33,8 @@ const Table = ({ data, startDate, endDate, isTableLoading }: TableProps) => {
           </div>
         );
       },
+      //overlooked that table is not sorting app names as expected due to the image icons being added
+      //put a sort comparator so it works as expected now
       sortComparator: (v1, v2) => {
         return v1.appName.localeCompare(v2.appName);
       },

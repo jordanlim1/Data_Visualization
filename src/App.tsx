@@ -23,6 +23,7 @@ const App = () => {
     setDisplay(event.currentTarget.value);
   }
 
+  console.log(dayjs("2020-01-01"));
   return (
     <div className="container">
       <div
